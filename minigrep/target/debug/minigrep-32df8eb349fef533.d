@@ -1,0 +1,1 @@
+/Users/scott/Documents/rust/projects/minigrep/target/debug/minigrep-32df8eb349fef533.dSYM: /Users/scott/Documents/rust/projects/minigrep/src/lib.rs /Users/scott/Documents/rust/projects/minigrep/src/main.rs
