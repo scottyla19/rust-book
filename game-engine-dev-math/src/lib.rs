@@ -27,8 +27,20 @@ impl Mul<Vector3D> for Vector3D {
         self.x * v2.x + self.y * v2.y + self.z * v2.z
     }
 }
+impl Mul<&Vector3D> for &Vector3D {
+    type Output = f32;
+    fn mul(self, v2: &Vector3D) -> f32{
+        self.x * v2.x + self.y * v2.y + self.z * v2.z
+    }
+}
 
 impl Mul<f32> for Vector3D {
+    type Output = Vector3D;
+    fn mul(self, s: f32) -> Vector3D{
+        Vector3D{x: self.x * s, y:self.y * s, z:self.z * s}
+    }
+}
+impl Mul<f32> for &Vector3D {
     type Output = Vector3D;
     fn mul(self, s: f32) -> Vector3D{
         Vector3D{x: self.x * s, y:self.y * s, z:self.z * s}
@@ -41,11 +53,15 @@ impl Div<f32> for Vector3D {
     }
 }
 impl Vector3D {
-    fn dot(v1: Vector3D, v2:Vector3D) -> f32 {
+    fn dot<'a>(v1: &'a Vector3D, v2: &Vector3D) -> f32 {
         v1 * v2
     }
-    fn cross(v1: Vector3D, v2:Vector3D) -> Vector3D {
+    fn cross<'a>(v1: &'a Vector3D, v2: &Vector3D) -> Vector3D {
         Vector3D {x: v1.y*v2.z - v1.z*v2.y, y: v1.z*v2.x - v1.x*v2.z, z: v1.x*v2.y - v1.y*v2.x}
+    }
+    fn project<'a>(v1: &'a Vector3D, v2: &Vector3D) -> Vector3D {
+        v2*((v1*v2)/(v2*v2))
+        
     }
     fn normalize(&self) -> Vector3D {
         let mag = self.magnitude();
@@ -100,12 +116,19 @@ mod tests {
     }
     #[test]
     fn test_dot_two_vector3ds() {
-        let dot = Vector3D::dot(V1, V2);
+        let dot = Vector3D::dot(&V1, &V2);
         assert_eq!(dot, 56.0);
     }
     #[test]
+    fn test_project_two_vector3ds() {
+        let proj = Vector3D::project(&V1, &V2);
+        assert_eq!(proj.x, 28.0/11.0);
+        assert_eq!(proj.y, 168.0/55.0);
+        assert_eq!(proj.z, 196.0/55.0);
+    }
+    #[test]
     fn test_cross_two_vector3ds() {
-        let cross = Vector3D::cross(V1, V2);
+        let cross = Vector3D::cross(&V1, &V2);
         assert_eq!(cross.x, -3.0);
         assert_eq!(cross.y, 6.0);
         assert_eq!(cross.z, -3.0);
