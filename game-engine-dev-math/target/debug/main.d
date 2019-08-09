@@ -1,0 +1,1 @@
+/Users/scott/Documents/rust/projects/game-engine-dev-math/target/debug/main.dSYM: /Users/scott/Documents/rust/projects/game-engine-dev-math/src/lib.rs /Users/scott/Documents/rust/projects/game-engine-dev-math/src/main.rs /Users/scott/Documents/rust/projects/game-engine-dev-math/src/vector.rs

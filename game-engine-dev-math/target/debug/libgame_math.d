@@ -1,0 +1,1 @@
+/Users/scott/Documents/rust/projects/game-engine-dev-math/target/debug/libgame_math.rlib: /Users/scott/Documents/rust/projects/game-engine-dev-math/src/lib.rs /Users/scott/Documents/rust/projects/game-engine-dev-math/src/vector.rs
